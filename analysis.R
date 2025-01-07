@@ -9,7 +9,7 @@ library(dplyr)
 
 # Variables ----
 n <- 20
-gender_values <- c("Female", "Male")
+gender_values <- c("Female", "Male", "Other")
 
 participant_id <- as.numeric(1:n)
 age <-  as.numeric(floor(sample(18:60, n, replace = TRUE)))
@@ -26,5 +26,5 @@ df <- data.frame(participant_id, age, gender, reaction_time_avg,
 save(df, file = file.path("./", "df.rdata"))
 View(df)
 
-summery_df = create_results_dataframe(df)
+summery_df = create_results_dataframe(df, 1, 6)
 print(summery_df)

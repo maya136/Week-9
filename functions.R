@@ -15,7 +15,7 @@ categorial_list = c("factor")
 # Functions ----
 
 # This function creates a results df
-create_results_dataframe <- function(df, subject_start=0, subject_end=0) {
+create_results_dataframe <- function(df, subject_start=0, subject_end=0){
   
   print(nrow(df))
   if (nrow(df) < 10){
@@ -23,10 +23,16 @@ create_results_dataframe <- function(df, subject_start=0, subject_end=0) {
     return(NA)
   }
   
-  if (subject_end > nrow(df)){
-    print("end given not in range! we will use all participants")
+  if ( class(subject_end) != "numeric" | subject_end > nrow(df) | subject_end < 0 ){
+    print("end given not in range! it wil be the end of data")
     subject_end = 0
   }
+  
+  if ( class(subject_start) != "numeric" | subject_start < 0 | subject_start > nrow(df) ){
+    print("start given not in range! it will be from the start")
+    subject_start = 0
+  }
+  
   
   if (subject_end != 0){
     df <- df[df$participant_id >= subject_start & df$participant_id <= subject_end, ]
